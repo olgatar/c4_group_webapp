@@ -1,11 +1,9 @@
-
-
-
 //Register new user
 
 var ref = new Firebase("https://fro15-c4-webapp.firebaseio.com");
-$(".confirm-registration-btn").on("click", function() {
+$("#confirm-registration-btn").on("click", function() {
   event.preventDefault();
+  var username = $("#username-registration-input").val();
   var email = $("#email-registration-input").val();
   var password = $("#password-registration-input").val();
   ref.createUser({
@@ -15,26 +13,26 @@ $(".confirm-registration-btn").on("click", function() {
     if (error) {
       $("#register-message").text(error);
     } else {
-      window.location.replace("loggedin.html");
+      ref.authWithPassword({
+        email    : email,
+        password : password
+      }, function(error, authData) {
+        if (error) {
+          $("#register-message").text(error);
+        } else {
+          var userID = authData.uid;
+          ref.child('users').child(userID).set({username: username, email: email});
+          window.location.replace("loggedin.html");
+        }
+      });
     }
   });
 });
 
-///////////////////
-// Till chatten:
-
-//var username = $("#username-registration-input").val();
-
-//var usersRef = ref.child("users");
-//usersRef.set({
-    //username: username
-//});
-//////////////////
-
 //Login user
 
 var ref = new Firebase("https://fro15-c4-webapp.firebaseio.com");
-$(".sign-in-btn").on("click", function() {
+$("#sign-in-btn").on("click", function() {
   event.preventDefault();
   var email = $("#email-input").val();
   var password = $("#password-input").val();

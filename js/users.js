@@ -14,7 +14,18 @@ $("#register-button").on("click", function() {
     if (error) {
       $("#error-register").text(error);
     } else {
-      window.location.replace("org-loggedin.html");
+      ref.authWithPassword({
+        email    : email,
+        password : password
+      }, function(error, authData) {
+        if (error) {
+          $("#error-register").text(error);
+        } else {
+          var orguserID = authData.uid;
+          ref.child('orgusers').child(orguserID).set({username: username, email: email});
+          window.location.replace("org-loggedin.html");
+        }
+      });
     }
   });
 });
