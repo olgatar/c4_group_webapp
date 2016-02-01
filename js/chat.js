@@ -1,15 +1,15 @@
 // Get user
 var myDataRef = new Firebase("https://fro15-c4-webapp.firebaseio.com");
+var usernameRef = new Firebase("https://fro15-c4-webapp.firebaseio.com/users");
 var authData = myDataRef.getAuth();
 var user = authData.uid;
 
 $('#messageInput').keypress(function (e) {
   if (e.keyCode == 13) {
     var text = $('#messageInput').val();
-    var usernameRef = new Firebase("https://fro15-c4-webapp.firebaseio.com/users");
     usernameRef.once("value", function(snapshot) {
-      var username = snapshot.child(user).child('username').val();
-      myDataRef.push({name: username, text: text});
+      var name = snapshot.child(user).child('username').val();
+      myDataRef.push({name: name, text: text});
     });
     $('#messageInput').val('');
   }
@@ -21,6 +21,8 @@ myDataRef.on('child_added', function(snapshot) {
 });
 
 function displayChatMessage(name, text) {
-  $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-  $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+  if (text) { //in chatt flow are added only nodes in which message.text exist
+    $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+    $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+  }
 };
