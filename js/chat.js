@@ -4,6 +4,7 @@ var usernameRef = new Firebase("https://fro15-c4-webapp.firebaseio.com/users");
 var authData = myDataRef.getAuth();
 var user = authData.uid;
 
+
 $('#messageInput').keypress(function (e) {
   if (e.keyCode == 13) {
     var text = $('#messageInput').val();
@@ -11,7 +12,7 @@ $('#messageInput').keypress(function (e) {
       var name = snapshot.child(user).child('username').val();
       myDataRef.push({name: name, text: text});
     });
-    $('#messageInput').val('');
+    $('#messageInput').val(''); 
   }
 });
 
@@ -26,3 +27,5 @@ function displayChatMessage(name, text) {
     $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
   }
 };
+
+
