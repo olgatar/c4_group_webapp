@@ -510,10 +510,10 @@ footer p {
 /* Landingpage */
 
 	.landing-page {
-		background: url("../img/background.jpg"), #333333;
+		background: url("../img/background_v2.jpg"), #333333;
 		background-repeat: no-repeat;
-		background-size: 2000px;
-		background-position: -800px 115px;
+		background-size: 2100px;
+		background-position: -900px 0px;
 	}
 
 	.landing-page h1, .about-page h1{
@@ -597,9 +597,9 @@ footer p {
 @media screen and (min-width: 1200px) {
 
 	.landing-page{
-			background: url("../img/background.jpg"), #333333;
+			background: url("../img/background_v2.jpg"), #333333;
 			background-repeat: no-repeat;
-			background-size: 2300px;
+			background-size: 2200px;
 			background-position: -550px -20px;
 	}
 
@@ -676,7 +676,7 @@ footer p {
 @media screen and (min-width: 1500px) {
 
 	.landing-page{
-			background: url("../img/background.jpg"), #333333;
+			background: url("../img/background_v2.jpg"), #333333;
 			background-repeat: no-repeat;
 			background-size: cover;
 			}
