@@ -12,7 +12,7 @@ $('#messageInput').keypress(function (e) {
       var name = snapshot.child(user).child('username').val();
       myDataRef.push({name: name, text: text});
     });
-    $('#messageInput').val(''); 
+    $('#messageInput').val('');
   }
 });
 
@@ -24,8 +24,8 @@ myDataRef.on('child_added', function(snapshot) {
 function displayChatMessage(name, text) {
   if (text) { //in chatt flow are added only nodes in which message.text exist
     $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+    $('em').css("font-weight", "bold");
+    $('em').css("font-size", "medium");
     $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
   }
 };
-
-
